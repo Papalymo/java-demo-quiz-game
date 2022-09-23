@@ -32,14 +32,11 @@ public class Main {
                 String response = CustomHttpClient.sendGET(URL);
                 List<CluesDTO> cluesList = CustomHttpClient.getCluesList(response);
 
-                //random of 100 questions was giving the same questions too often, so collection shuffle is the better solution
-                //i would like to use https://jservice.kenzie.academy/api/clues/:id to get a random out of all 355237 clues but
-                // having trouble getting the id links
                 List<Integer> randomNumberList = new ArrayList<>();
-                for (int j = 1; j < 101; j++ ) {
-                    randomNumberList.add( j );
+                for (int j = 0; j < 100; j++) {
+                    randomNumberList.add(j);
                 }
-                Collections.shuffle( randomNumberList );
+                Collections.shuffle(randomNumberList);
                 int index = 0;
 
                 for (CluesDTO clues : cluesList) {
@@ -79,9 +76,7 @@ public class Main {
                         }
                     }
                     needInput = false;
-                    System.out.println(bold + green + "*************************" + reset);
-                    System.out.println(bold + green + "*  Your Final Score: " + score + " *" + reset);
-                    System.out.println(bold + green + "*************************" + reset);
+                    scoreBoard(score);
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -113,6 +108,13 @@ public class Main {
                 System.out.println("Great job!!");
                 break;
         }
+    }
+
+    public static void scoreBoard(int score) {
+
+        System.out.println(bold + green + "*************************");
+        System.out.println("*  Your Final Score: " + score + " *");
+        System.out.println("*************************" + reset);
     }
 }
 
